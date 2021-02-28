@@ -18,7 +18,7 @@ BLACK = 0, 0, 0
 
 ROAD = pygame.image.load("Art/Road.png")
 
-testCar = c.Car(580, 0)
+
 
 def get_events():
     for event in pygame.event.get():
@@ -42,7 +42,7 @@ def spawn_cars():
 
 
 def main():
-    testCar = c.Car(315, 1000)
+
     timer = 0
     running = True
     spawnRate = random.randint(1, 10) # Chooses the first rate the cars will spawn, will be changed later
@@ -52,22 +52,23 @@ def main():
     while running:
         timer += 1
 
-
-        screen.fill(BLACK)
         screen.blit(ROAD, (0, 0))
 
-        if timer > spawnRate * 60:  # Every one to ten seconds
+        if timer > 120:  # Every one to ten seconds
             spawnRate = random.randint(1,10) # Rerolls for another spawnRate, this is so that the cars dont spawn in a uniform rate
             timer = 0 # Resets the timer
-            for x in range(5):
+            cars.append(c.Car(315, 0))
+            cars.append(c.Car(377, 0))
+            cars.append(c.Car(440, 0))
+            cars.append(c.Car(525, 1000))
+            cars.append(c.Car(597, 1000))
+            cars.append(c.Car(660, 1000))
 
-                cars.append(c.Car(random.choice(car_x), random.choice(car_y)))
 
 
         for car in cars:
             car.render(screen)
-            car.move(2)
-
+            car.move()
 
 
 
