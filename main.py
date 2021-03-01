@@ -4,6 +4,7 @@ import TrafficSim_Classes as c
 import random
 
 pygame.init()
+
 clock = pygame.time.Clock()
 
 
@@ -18,35 +19,13 @@ BLACK = 0, 0, 0
 
 ROAD = pygame.image.load("Art/Road.png")
 
-
-
-def get_events():
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            running = False
-            pygame.quit()
-def spawn_cars():
-    cars = []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def main():
 
     timer = 0
     running = True
     spawnRate = random.randint(1, 10) # Chooses the first rate the cars will spawn, will be changed later
     cars = []
+    voidCars = []
     car_x = [315, 377, 440, 535, 597, 660]
     car_y = [-100, 1100]
     while running:
@@ -69,12 +48,18 @@ def main():
         for car in cars:
             car.render(screen)
             car.move()
+            if car.y > 1000 or car.y < -100:
+                voidCars.append(car)
+        for voidCar in voidCars:
+            for car in cars:
+                if car == voidCar:
+                    cars.remove(car)
 
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+                print(cars)
 
-
-
-
-        get_events()
         pygame.display.flip()
         clock.tick(60)
 
