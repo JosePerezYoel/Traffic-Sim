@@ -55,11 +55,13 @@ def main():
                 if car == voidCar:
                     cars.remove(car)
 
+        voidCars.clear()
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
                 print(cars)
-
+                print(voidCars)
         pygame.display.flip()
         clock.tick(60)
 
